@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
-import { Context } from "../../main";
 import './PostJobs.css';
+import api from "../../lib/api";
 
 const PostJob = () => {
   const [title, setTitle] = useState("");
@@ -17,8 +15,6 @@ const PostJob = () => {
   const [fixedSalary, setFixedSalary] = useState("");
   const [salaryType, setSalaryType] = useState("default");
 
-  const { isAuthorized, user } = useContext(Context);
-
   const handleJobPost = async (e) => {
     e.preventDefault();
     if (salaryType === "Fixed Salary") {
@@ -31,9 +27,9 @@ const PostJob = () => {
       setSalaryTo("");
       setFixedSalary("");
     }
-    await axios
+    await api
       .post(
-        "http://localhost:5000/api/v1/job/post",
+        "/job/post",
         fixedSalary.length >= 4
           ? {
             title,
@@ -54,25 +50,15 @@ const PostJob = () => {
             salaryFrom,
             salaryTo,
           },
-        {
-          withCredentials: true,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
+        { headers: { "Content-Type": "application/json" } }
       )
       .then((res) => {
         toast.success(res.data.message);
       })
       .catch((err) => {
-        toast.error(err.response.data.message);
+        toast.error(err.response?.data?.message || "Unable to post job.");
       });
   };
-
-  const navigateTo = useNavigate();
-  if (!isAuthorized || (user && user.role !== "Employer")) {
-    navigateTo("/");
-  }
 
   return (
     <>

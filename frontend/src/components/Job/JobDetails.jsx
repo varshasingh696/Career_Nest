@@ -1,33 +1,27 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Context } from "../../main";
 import './JobDetails.css';
+import api from "../../lib/api";
 
 const JobDetails = () => {
   const { id } = useParams();
   const [job, setJob] = useState({});
   const navigateTo = useNavigate();
 
-  const { isAuthorized, user } = useContext(Context);
+  const { user } = useContext(Context);
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/v1/job/${id}`, {
-        withCredentials: true,
-      })
+    api
+      .get(`/job/${id}`)
       .then((res) => {
         setJob(res.data.job);
       })
-      .catch((error) => {
+      .catch(() => {
         navigateTo("/notfound");
       });
-  }, []);
-
-  if (!isAuthorized) {
-    navigateTo("/login");
-  }
+  }, [id, navigateTo]);
 
   return (
     <section className="jobDetail page">

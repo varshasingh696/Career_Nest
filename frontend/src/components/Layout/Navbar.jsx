@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Context } from "../../main";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { GiHamburgerMenu } from "react-icons/gi";
 import './Navbar.css';
+import api from "../../lib/api";
 
 const Navbar = () => {
   const [show, setShow] = useState(false);
@@ -13,17 +13,13 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/user/logout",
-        {
-          withCredentials: true,
-        }
-      );
+      const response = await api.get("/user/logout");
       toast.success(response.data.message);
       setIsAuthorized(false);
       navigateTo("/");
     } catch (error) {
-      toast.error(error.response.data.message); setIsAuthorized(true);
+      toast.error(error.response?.data?.message || "Logout failed.");
+      setIsAuthorized(true);
     }
   };
 

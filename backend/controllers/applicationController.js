@@ -129,6 +129,11 @@ export const jobseekerDeleteApplication = catchAsyncErrors(
     if (!application) {
       return next(new ErrorHandler("Application not found!", 404));
     }
+    if (application.applicantID.user.toString() !== req.user._id.toString()) {
+      return next(
+        new ErrorHandler("You can only delete your own applications.", 403)
+      );
+    }
     await application.deleteOne();
     res.status(200).json({
       success: true,

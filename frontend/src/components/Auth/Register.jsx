@@ -5,10 +5,10 @@ import { RiLock2Fill } from "react-icons/ri";
 import { FaPencilAlt } from "react-icons/fa";
 import { FaPhoneFlip } from "react-icons/fa6";
 import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
 import './Register.css';
+import api from "../../lib/api";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -17,20 +17,15 @@ const Register = () => {
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
 
-  const { isAuthorized, setIsAuthorized, user, setUser } = useContext(Context);
+  const { isAuthorized, setIsAuthorized } = useContext(Context);
 
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/user/register",
+      const { data } = await api.post(
+        "/user/register",
         { name, phone, email, role, password },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
       toast.success(data.message);
       setName("");
@@ -40,7 +35,7 @@ const Register = () => {
       setRole("");
       setIsAuthorized(true);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Registration failed.");
     }
   };
 

@@ -13,16 +13,16 @@ function Contact() {
                         <img className="logo" src="/logo-png.png" alt="logo" />
                         <ul className="list">
                             <li>
-                                <Link to="/" onClick={() => setShow(false)}>
+                                <Link to="/">
                                     HOME
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/about" onClick={() => setShow(false)}>
+                                <Link to="/about">
                                     About
                                 </Link>
                             </li>
-                            <Link to="/login" onClick={() => setShow(false)}>
+                            <Link to="/login">
                                 <button className="Login_btn">Login/Signup</button>
                             </Link>
                         </ul>

@@ -93,14 +93,17 @@ export const updateJob = catchAsyncErrors(async (req, res, next) => {
   if (!job) {
     return next(new ErrorHandler("OOPS! Job not found.", 404));
   }
+  if (job.postedBy.toString() !== req.user._id.toString()) {
+    return next(new ErrorHandler("You can update only your own jobs.", 403));
+  }
   job = await Job.findByIdAndUpdate(id, req.body, {
     new: true,
     runValidators: true,
-    useFindAndModify: false,
   });
   res.status(200).json({
     success: true,
-    message: "Job Updated Scuccessfully!",
+    message: "Job updated successfully!",
+    job,
   });
 });
 
@@ -114,9 +117,10 @@ export const deleteJob = catchAsyncErrors(async (req, res, next) => {
   const { id } = req.params;
   const job = await Job.findById(id);
   if (!job) {
-    
-
     return next(new ErrorHandler("OOPS! Job not found.", 404));
+  }
+  if (job.postedBy.toString() !== req.user._id.toString()) {
+    return next(new ErrorHandler("You can delete only your own jobs.", 403));
   }
   await job.deleteOne();
   res.status(200).json({

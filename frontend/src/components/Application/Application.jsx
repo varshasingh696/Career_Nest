@@ -1,9 +1,8 @@
-import axios from "axios";
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate, useParams } from "react-router-dom";
-import { Context } from "../../main";
 import './Application.css';
+import api from "../../lib/api";
 
 
 const Application = () => {
@@ -13,8 +12,6 @@ const Application = () => {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [resume, setResume] = useState(null);
-
-  const { isAuthorized, user } = useContext(Context);
 
   const navigateTo = useNavigate();
 
@@ -37,11 +34,10 @@ const Application = () => {
     formData.append("jobId", id);
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/application/post",
+      const { data } = await api.post(
+        "/application/post",
         formData,
         {
-          withCredentials: true,
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -56,13 +52,9 @@ const Application = () => {
       toast.success(data.message);
       navigateTo("/job/getall");
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Application submission failed.");
     }
   };
-
-  if (!isAuthorized || (user && user.role === "Employer")) {
-    navigateTo("/");
-  }
 
   return (
     <section className="application">

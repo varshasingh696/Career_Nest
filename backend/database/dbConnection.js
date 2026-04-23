@@ -1,14 +1,14 @@
 import mongoose from "mongoose";
 
 
-export const dbConnection = () =>{
-    mongoose.connect(process.env.MONGO_URI, {
-        dbName: "MERN_STACK_JOB_SEEKING"
-    }).then(() =>{
-        console.log("Databse Connected Successfully");
-    })
-    .catch((error) => {
-          console.log("Some error occured")
-          console.log(error);
-    })
-}
+export const dbConnection = async () => {
+  const mongoUri = process.env.MONGO_URI;
+  const dbName = process.env.MONGO_DB_NAME || "jobquest";
+
+  if (!mongoUri) {
+    throw new Error("MONGO_URI is required");
+  }
+
+  await mongoose.connect(mongoUri, { dbName });
+  console.log("Database connected successfully");
+};

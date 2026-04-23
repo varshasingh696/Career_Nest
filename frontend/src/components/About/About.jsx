@@ -11,16 +11,16 @@ function About() {
                         <img className="logo" src="/logo-png.png" alt="logo" />
                         <ul className="list">
                             <li>
-                                <Link to="/" onClick={() => setShow(false)}>
+                                <Link to="/">
                                     HOME
                                 </Link>
                             </li>
                             <li>
-                                <Link to="/contact" onClick={() => setShow(false)}>
+                                <Link to="/contact">
                                     CONTACT US
                                 </Link>
                             </li>
-                            <Link to="/login" onClick={() => setShow(false)}>
+                            <Link to="/login">
                                 <button className="Login_btn">Login/Signup</button>
                             </Link>
                         </ul>

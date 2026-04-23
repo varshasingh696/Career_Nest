@@ -3,11 +3,10 @@ import { MdOutlineMailOutline } from "react-icons/md";
 import { RiLock2Fill } from "react-icons/ri";
 import { Link, Navigate } from "react-router-dom";
 import { FaRegUser } from "react-icons/fa";
-import axios from "axios";
 import toast from "react-hot-toast";
 import { Context } from "../../main";
 import './Login.css';
-import Navbar from "../Layout/Navbar";
+import api from "../../lib/api";
 
 
 const Login = () => {
@@ -21,15 +20,10 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/user/login",
+      const { data } = await api.post(
+        "/user/login",
         { email, password, role },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
+        { headers: { "Content-Type": "application/json" } }
       );
       toast.success(data.message);
       setEmail("");
@@ -37,7 +31,7 @@ const Login = () => {
       setRole("");
       setIsAuthorized(true);
     } catch (error) {
-      toast.error(error.response.data.message);
+      toast.error(error.response?.data?.message || "Login failed.");
     }
   };
 
