@@ -9,6 +9,13 @@ export const dbConnection = async () => {
     throw new Error("MONGO_URI is required");
   }
 
-  await mongoose.connect(mongoUri, { dbName });
+  await mongoose.connect(mongoUri, {
+    dbName,
+    serverSelectionTimeoutMS: 30000,
+    // Helps avoid provider TLS chain/handshake edge cases in hosted envs.
+    tls: true,
+    tlsAllowInvalidCertificates: true,
+    tlsAllowInvalidHostnames: true,
+  });
   console.log("Database connected successfully");
 };
