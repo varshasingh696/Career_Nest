@@ -248,4 +248,11 @@ VITE_API_URL=<your-backend-url>/api/v1
 ---
 
 ## Author
-Developed as a Full Stack Job Portal Project using MERN technologies.
+
+**Varsha Singh**  
+Developed as a Full Stack Job Portal Project using MERN technologies.  
+
+This project was designed and developed as a complete end-to-end job portal system, focusing on secure authentication, scalable backend architecture, and real-world application workflows.
+
+🔗 GitHub: https://github.com/varshasingh696
+🔗 LinkedIn: https://www.linkedin.com/in/varsha-singh-587191287
