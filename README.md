@@ -1,127 +1,251 @@
-# JobQuest (Round 2 Ready)
+# JobQuest – Full Stack Job Portal
 
-JobQuest is a full-stack job platform where:
-- Employers can post, manage, and delete jobs.
-- Job Seekers can browse jobs and submit applications.
-- Both roles can securely register, login, and logout.
+JobQuest is a modern full-stack job platform designed to connect employers and job seekers through a secure and efficient hiring system.
 
-The project is now upgraded to production-ready standards for the Cleanian Round 2 assignment.
+Employers can post and manage jobs, while job seekers can explore opportunities and submit applications through an intuitive interface.
 
-## Production Features Implemented
+---
 
-- Real authentication flow:
-  - Signup/Register
-  - Login
-  - Secure logout
-  - JWT-based auth with HTTP-only cookies
-  - Password hashing with `bcrypt`
-- Structured backend architecture:
-  - Modular `routes`, `controllers`, `models`, `middlewares`, `utils`
-  - REST APIs for users, jobs, and applications
-  - Centralized error handling
-  - Role-based and ownership access checks
-- Database integration:
-  - MongoDB connection via Mongoose
-  - User/Job/Application schemas
-  - Secure storage for auth data
-  - CRUD operations for jobs and applications
-- Frontend improvements:
-  - Central API client with environment-based base URL
-  - Protected routes by auth + role
-  - Improved auth/session bootstrapping
-  - Better API error fallback messages
-  - Responsive UI preserved from existing design
-- Deployment readiness:
-  - Environment variable support (`.env.example`)
-  - Production-safe cookie settings
-  - Build verified (`vite build`)
+## Features
+
+### Authentication & Security
+- User Registration and Login
+- Secure Logout
+- JWT Authentication
+- HTTP-only Cookie Sessions
+- Password Encryption using bcrypt
+- Role-Based Access Control
+
+---
+
+## Employer Features
+- Create Job Posts
+- Update Job Listings
+- Delete Jobs
+- Manage Posted Jobs
+- View Applicants
+
+---
+
+## Job Seeker Features
+- Browse Available Jobs
+- Apply for Jobs
+- Track Applications
+- Manage Profile
+
+---
+
+## Core Functionalities
+- RESTful APIs
+- CRUD Operations
+- Protected Routes
+- Ownership Authorization
+- Centralized Error Handling
+- Session Persistence
+- Responsive User Interface
+
+---
 
 ## Tech Stack
 
-- Frontend: React + Vite
-- Backend: Node.js + Express
-- Database: MongoDB + Mongoose
-- Auth/Security: JWT + bcrypt + HTTP-only cookies
+### Frontend
+- React.js
+- Vite
+- JavaScript
+- CSS
+
+### Backend
+- Node.js
+- Express.js
+
+### Database
+- MongoDB
+- Mongoose
+
+### Security
+- JWT
+- bcrypt
+- HTTP-only Cookies
+
+---
 
 ## Project Structure
 
-- `frontend/` - React client
-- `backend/` - Express API server
-
-## Local Setup
-
-### 1) Clone and install
-
 ```bash
-git clone <your-repo-url>
-cd JobQuest
-cd backend && npm install
-cd ../frontend && npm install
+JobQuest/
+│
+├── frontend/        # React Client
+├── backend/         # Express Server
+│
+├── routes/          # API Routes
+├── controllers/     # Business Logic
+├── models/          # Database Schemas
+├── middlewares/     # Authentication & Authorization
+├── utils/           # Helper Functions
 ```
 
-### 2) Configure environment files
+---
 
-Create `.env` files using:
-- `backend/.env.example`
-- `frontend/.env.example`
+## Installation
 
-### 3) Start development servers
+### Clone Repository
+```bash
+git clone <repository-url>
+cd JobQuest
+```
 
-Backend:
+### Install Dependencies
+
+Backend
+```bash
+cd backend
+npm install
+```
+
+Frontend
+```bash
+cd frontend
+npm install
+```
+
+---
+
+## Environment Variables
+
+Create `.env` files inside frontend and backend folders.
+
+### Backend (.env)
+
+```env
+PORT=
+NODE_ENV=
+FRONTEND_URLS=
+MONGO_URI=
+MONGO_DB_NAME=
+JWT_SECRET_KEY=
+JWT_EXPIRE=
+COOKIE_EXPIRE_DAYS=
+
+CLOUDINARY_CLIENT_NAME=
+CLOUDINARY_CLIENT_API=
+CLOUDINARY_CLIENT_SECRET=
+```
+
+---
+
+### Frontend (.env)
+
+```env
+VITE_API_URL=http://localhost:5000/api/v1
+```
+
+---
+
+## Run Project
+
+Start Backend
 ```bash
 cd backend
 npm run dev
 ```
 
-Frontend:
+Start Frontend
 ```bash
 cd frontend
 npm run dev
 ```
 
-## Environment Variables
+---
 
-### Backend (`backend/.env`)
+## API Modules
 
-- `PORT`
-- `NODE_ENV`
-- `FRONTEND_URLS` (comma-separated origins)
-- `MONGO_URI`
-- `MONGO_DB_NAME`
-- `JWT_SECRET_KEY`
-- `JWT_EXPIRE`
-- `COOKIE_EXPIRE_DAYS`
-- `CLOUDINARY_CLIENT_NAME`
-- `CLOUDINARY_CLIENT_API`
-- `CLOUDINARY_CLIENT_SECRET`
+### User APIs
+- Register User
+- Login User
+- Logout User
+- Get Profile
 
-### Frontend (`frontend/.env`)
+### Job APIs
+- Create Job
+- Update Job
+- Delete Job
+- Fetch All Jobs
 
-- `VITE_API_URL` (example: `http://localhost:5000/api/v1`)
+### Application APIs
+- Apply for Job
+- View Applications
+- Manage Applicants
 
-## Deployment (Render + Vercel/Netlify)
+---
 
-### Backend on Render
+## Deployment
 
-1. Create a new Web Service from `backend`.
-2. Build command: `npm install`
-3. Start command: `npm start`
-4. Add backend environment variables from `backend/.env.example`.
-5. Set `NODE_ENV=production`.
-6. Set `FRONTEND_URLS` to your frontend deployed URL.
+### Backend Deployment
+Deploy backend using Render.
 
-### Frontend on Vercel or Netlify
+- Build Command:
+```bash
+npm install
+```
 
-1. Deploy `frontend`.
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. Add `VITE_API_URL` pointing to your Render API URL + `/api/v1`.
+- Start Command:
+```bash
+npm start
+```
+
+Add all backend environment variables before deployment.
+
+---
+
+### Frontend Deployment
+Deploy frontend using Vercel or Netlify.
+
+- Build Command
+```bash
+npm run build
+```
+
+- Publish Directory
+```bash
+dist
+```
+
+Set:
+
+```env
+VITE_API_URL=<your-backend-url>/api/v1
+```
+
+---
+
+## Project Highlights
+- Secure Authentication System
+- Role-Based Job Management
+- Complete Job Application Workflow
+- Modular Backend Architecture
+- Production Ready Deployment Setup
+
+---
 
 ## Submission Checklist
 
-- [ ] Push clean code to GitHub
-- [ ] Deploy backend
-- [ ] Deploy frontend
-- [ ] Verify signup/login/logout flow on deployed app
-- [ ] Verify protected routes and role-specific pages
-- [ ] Submit GitHub + live links
+- Source Code Uploaded to GitHub  
+- Backend Deployed  
+- Frontend Deployed  
+- Authentication Verified  
+- Protected Routes Tested  
+- GitHub and Live Links Ready  
+
+---
+
+## Future Enhancements
+- Resume Upload
+- Job Search Filters
+- Email Notifications
+- Admin Dashboard
+- Interview Scheduling
+
+---
+
+## Author
+Developed as a Full Stack Job Portal Project using MERN technologies.
