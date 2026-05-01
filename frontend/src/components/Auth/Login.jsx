@@ -21,7 +21,7 @@ const Login = () => {
     e.preventDefault();
     try {
       const { data } = await api.post(
-        "/user/login",
+      "/api/v1/user/login",
         { email, password, role },
         { headers: { "Content-Type": "application/json" } }
       );

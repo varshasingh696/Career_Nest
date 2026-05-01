@@ -22,8 +22,8 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await api.post(
-        "/user/register",
+       const { data } = await api.post(
+      "/api/v1/user/register",
         { name, phone, email, role, password },
         { headers: { "Content-Type": "application/json" } }
       );
@@ -38,6 +38,8 @@ const Register = () => {
       toast.error(error.response?.data?.message || "Registration failed.");
     }
   };
+
+  
 
   if(isAuthorized){
     return <Navigate to={'/'}/>

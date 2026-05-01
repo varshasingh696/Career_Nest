@@ -13,7 +13,8 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const response = await api.get("/user/logout");
+      // const response = await api.get("/user/logout");
+      const response = await api.get("/api/v1/user/logout");
       toast.success(response.data.message);
       setIsAuthorized(false);
       navigateTo("/");
