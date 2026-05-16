@@ -18,8 +18,8 @@ const MyApplications = () => {
       try {
         const endpoint =
           user && user.role === "Employer"
-            ? "/application/employer/getall"
-            : "/application/jobseeker/getall";
+            ? "/api/v1/application/employer/getall"
+            : "/api/v1/application/jobseeker/getall";
         const res = await api.get(endpoint);
         setApplications(res.data.applications);
       } catch (error) {

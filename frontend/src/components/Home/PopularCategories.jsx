@@ -9,10 +9,14 @@ import { TbAppsFilled } from "react-icons/tb";
 import { FaReact } from "react-icons/fa";
 import { GiArtificialIntelligence } from "react-icons/gi";
 import { IoGameController } from "react-icons/io5";
-import './PopularCategories.css';
+import { useNavigate } from "react-router-dom";
 
+import "./PopularCategories.css";
 
 const PopularCategories = () => {
+
+  const navigate = useNavigate();
+
   const categories = [
     {
       id: 1,
@@ -63,14 +67,22 @@ const PopularCategories = () => {
       icon: <IoGameController />,
     },
   ];
+
   return (
     <div className="categories">
       <h3>POPULAR CATEGORIES</h3>
+
       <div className="banner">
         {categories.map((element) => {
           return (
-            <div className="card" key={element.id}>
+            <div
+              className="card"
+              key={element.id}
+              onClick={() => navigate("/job/getall")}
+              style={{ cursor: "pointer" }}
+            >
               <div className="icon">{element.icon}</div>
+
               <div className="text">
                 <p>{element.title}</p>
                 <p>{element.subTitle}</p>
