@@ -1,8 +1,19 @@
 import React from "react";
-import { FaBuilding, FaSuitcase, FaUsers, FaUserPlus } from "react-icons/fa";
-import './HeroSection.css';
+import {
+  FaBuilding,
+  FaSuitcase,
+  FaUsers,
+  FaUserPlus,
+} from "react-icons/fa";
+
+import { useNavigate } from "react-router-dom";
+
+import "./HeroSection.css";
 
 const HeroSection = () => {
+
+  const navigate = useNavigate();
+
   const details = [
     {
       id: 1,
@@ -29,33 +40,55 @@ const HeroSection = () => {
       icon: <FaUserPlus />,
     },
   ];
+
   return (
     <>
       <div className="heroSection">
+
         <div className="container">
+
           <div className="title">
+
             <h1>Find a job that suits</h1>
+
             <h1>your interests and skills</h1>
+
             <p>
-              Welcome to JobQuest, where your career goals meet the best opportunities. From tech startups to industry leaders, find jobs that fit your lifestyle and aspirations. Start your path to success now.
+              Welcome to JobQuest, where your career goals meet the
+              best opportunities. From tech startups to industry leaders,
+              find jobs that fit your lifestyle and aspirations.
+              Start your path to success now.
             </p>
+
           </div>
+
           <div className="image">
             <img src="/heroS.jpg" alt="hero" />
           </div>
+
         </div>
+
         <div className="details">
+
           {details.map((element) => {
             return (
-              <div className="card" key={element.id}>
+              <div
+                className="card"
+                key={element.id}
+                onClick={() => navigate("/job/getall")}
+                style={{ cursor: "pointer" }}
+              >
                 <div className="icon">{element.icon}</div>
+
                 <div className="content">
                   <p>{element.title}</p>
                   <p>{element.subTitle}</p>
                 </div>
+
               </div>
             );
           })}
+
         </div>
       </div>
     </>
